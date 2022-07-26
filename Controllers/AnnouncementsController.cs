@@ -2,8 +2,8 @@
 using BulletinBoard.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PagedList;
-using PagedList.Mvc;
+using System.Collections;
+using X.PagedList;
 
 namespace BulletinBoard.Controllers
 {
@@ -23,18 +23,14 @@ namespace BulletinBoard.Controllers
             return View(await data.ToListAsync());
         }
 
-        public ActionResult Index(int? page)
+        public async Task<IActionResult> Index(int? page)
         {
-            return View(_context.Announcements.OrderByDescending(a => a.DateAdded).ToList().ToPagedList(page ?? 1, 3));
+            var announcements = _context.Announcements.OrderByDescending(a => a.DateAdded);
+            var pageNumber = page ?? 1;
+            var perPage = 10;
+            return View(await announcements.ToPagedListAsync(pageNumber, perPage));
         }
-        /*
-        public async Task<IActionResult> Index()
-        {
-              return _context.Announcements != null ?
-                          View(await _context.Announcements.OrderByDescending(a => a.DateAdded).ToListAsync()) :
-                          Problem("Entity set 'BulletinBoardContext.Announcements'  is null.");
-        }
-        */
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Announcements == null)
@@ -88,7 +84,7 @@ namespace BulletinBoard.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content,DateAdded")] Announcements announcements)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content")] Announcements announcements)
         {
             if (id != announcements.Id)
             {
@@ -99,7 +95,9 @@ namespace BulletinBoard.Controllers
             {
                 try
                 {
-                    _context.Update(announcements);
+                    var announcement = _context.Announcements.FirstOrDefault(x => x.Id == announcements.Id);
+                    announcement.Title = announcements.Title;
+                    announcement.Content = announcements.Content;
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -156,6 +154,11 @@ namespace BulletinBoard.Controllers
         private bool AnnouncementsExists(int id)
         {
           return (_context.Announcements?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
     }
 }

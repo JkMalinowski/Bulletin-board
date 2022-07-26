@@ -520,3 +520,8 @@ C:\Users\buzz\Source\Repos\Bulletin-board\obj\Debug\net6.0\refint\BulletinBoard.
 C:\Users\buzz\Source\Repos\Bulletin-board\obj\Debug\net6.0\BulletinBoard.pdb
 C:\Users\buzz\Source\Repos\Bulletin-board\obj\Debug\net6.0\BulletinBoard.genruntimeconfig.cache
 C:\Users\buzz\Source\Repos\Bulletin-board\obj\Debug\net6.0\ref\BulletinBoard.dll
+C:\Users\buzz\source\repos\Bulletin-board\obj\Debug\net6.0\BulletinBoard.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\buzz\source\repos\Bulletin-board\bin\Debug\net6.0\JetBrains.Annotations.dll
+C:\Users\buzz\source\repos\Bulletin-board\bin\Debug\net6.0\X.PagedList.dll
+C:\Users\buzz\source\repos\Bulletin-board\bin\Debug\net6.0\X.PagedList.Mvc.Core.dll
+C:\Users\buzz\source\repos\Bulletin-board\bin\Debug\net6.0\X.PagedList.Mvc.Bootstrap4.Core.dll

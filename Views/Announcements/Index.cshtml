@@ -1,8 +1,8 @@
 ﻿@model IPagedList<BulletinBoard.Models.Announcements>
 
-@using PagedList.Mvc;
-@using PagedList;
-
+@using X.PagedList;
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Bootstrap4.Core;
 @{
     ViewData["Title"] = "Index";
 }
@@ -50,4 +50,4 @@
     </tbody>
 </table>
 
-@Html.PagedListPager(Model, page => Url.Action("Index", "Announcements", new { page, search=RequestDelegate.QueryString["search"]}))
+@Html.PagedListPager(Model, page => Url.Action("Index", "Announcements", new { page }), Bootstrap4PagedListRenderOptions.ClassicPlusFirstAndLast)
