@@ -60,6 +60,7 @@ namespace BulletinBoard.Controllers
             announcements.DateAdded = DateTime.Now;
             if (ModelState.IsValid)
             {
+                TempData["SuccessMessage"] = $"Are You sure you want to add product with title: {announcements.Title}?";
                 _context.Add(announcements);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
