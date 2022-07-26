@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Kuba\\source\\repos\\BulletinBoard\\BulletinBoard.csproj": {}
+    "C:\\Users\\buzz\\Source\\Repos\\Bulletin-board\\BulletinBoard.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Kuba\\source\\repos\\BulletinBoard\\BulletinBoard.csproj": {
+    "C:\\Users\\buzz\\Source\\Repos\\Bulletin-board\\BulletinBoard.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Kuba\\source\\repos\\BulletinBoard\\BulletinBoard.csproj",
+        "projectUniqueName": "C:\\Users\\buzz\\Source\\Repos\\Bulletin-board\\BulletinBoard.csproj",
         "projectName": "BulletinBoard",
-        "projectPath": "C:\\Users\\Kuba\\source\\repos\\BulletinBoard\\BulletinBoard.csproj",
-        "packagesPath": "C:\\Users\\Kuba\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Kuba\\source\\repos\\BulletinBoard\\obj\\",
+        "projectPath": "C:\\Users\\buzz\\Source\\Repos\\Bulletin-board\\BulletinBoard.csproj",
+        "packagesPath": "C:\\Users\\buzz\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\buzz\\Source\\Repos\\Bulletin-board\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Kuba\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\buzz\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

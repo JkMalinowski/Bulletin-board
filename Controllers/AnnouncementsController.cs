@@ -19,10 +19,17 @@ namespace BulletinBoard.Controllers
             _context = context;
         }
 
+        public async Task<IActionResult> LastTenAnnouncements()
+        {
+            DateTime today = DateTime.Now;
+            var data = _context.Announcements.OrderByDescending(a => a.DateAdded).Take(10).Where(x => x.DateAdded.AddDays(10) > today).Skip(1);
+            return View(await data.ToListAsync());
+        }
+
         public async Task<IActionResult> Index()
         {
-              return _context.Announcements != null ? 
-                          View(await _context.Announcements.ToListAsync()) :
+              return _context.Announcements != null ?
+                          View(await _context.Announcements.OrderByDescending(a => a.DateAdded).ToListAsync()) :
                           Problem("Entity set 'BulletinBoardContext.Announcements'  is null.");
         }
 
@@ -139,7 +146,7 @@ namespace BulletinBoard.Controllers
             {
                 _context.Announcements.Remove(announcements);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
