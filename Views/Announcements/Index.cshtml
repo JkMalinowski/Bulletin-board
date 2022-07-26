@@ -1,10 +1,13 @@
-﻿@model IEnumerable<BulletinBoard.Models.Announcements>
+﻿@model IPagedList<BulletinBoard.Models.Announcements>
+
+@using PagedList.Mvc;
+@using PagedList;
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>All announcements</h1>
+<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Add announcement</a>
@@ -13,10 +16,10 @@
     <thead>
         <tr>
             <th class = "col-sm-9">
-                @Html.DisplayNameFor(model => model.Title)
+                @Html.DisplayNameFor(model => model.First().Title)
             </th>
             <th class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.DateAdded)
+                @Html.DisplayNameFor(model => model.First().DateAdded)
             </th>
             <th class = "col-sm-1"></th>
         </tr>
@@ -46,3 +49,5 @@
 }
     </tbody>
 </table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", "Announcements", new { page, search=RequestDelegate.QueryString["search"]}))

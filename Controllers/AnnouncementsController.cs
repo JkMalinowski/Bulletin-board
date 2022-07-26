@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using BulletinBoard.Data;
+﻿using BulletinBoard.Data;
 using BulletinBoard.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using PagedList;
+using PagedList.Mvc;
 
 namespace BulletinBoard.Controllers
 {
@@ -22,17 +19,22 @@ namespace BulletinBoard.Controllers
         public async Task<IActionResult> LastTenAnnouncements()
         {
             DateTime today = DateTime.Now;
-            var data = _context.Announcements.OrderByDescending(a => a.DateAdded).Take(10).Where(x => x.DateAdded.AddDays(10) > today).Skip(1);
+            var data = _context.Announcements.OrderByDescending(a => a.DateAdded).Take(10).Where(x => x.DateAdded.AddDays(10) > today);
             return View(await data.ToListAsync());
         }
 
+        public ActionResult Index(int? page)
+        {
+            return View(_context.Announcements.OrderByDescending(a => a.DateAdded).ToList().ToPagedList(page ?? 1, 3));
+        }
+        /*
         public async Task<IActionResult> Index()
         {
               return _context.Announcements != null ?
                           View(await _context.Announcements.OrderByDescending(a => a.DateAdded).ToListAsync()) :
                           Problem("Entity set 'BulletinBoardContext.Announcements'  is null.");
         }
-
+        */
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Announcements == null)

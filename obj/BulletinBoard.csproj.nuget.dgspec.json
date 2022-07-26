@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\buzz\\Source\\Repos\\Bulletin-board\\BulletinBoard.csproj": {}
+    "C:\\Users\\buzz\\source\\repos\\Bulletin-board\\BulletinBoard.csproj": {}
   },
   "projects": {
-    "C:\\Users\\buzz\\Source\\Repos\\Bulletin-board\\BulletinBoard.csproj": {
+    "C:\\Users\\buzz\\source\\repos\\Bulletin-board\\BulletinBoard.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\buzz\\Source\\Repos\\Bulletin-board\\BulletinBoard.csproj",
+        "projectUniqueName": "C:\\Users\\buzz\\source\\repos\\Bulletin-board\\BulletinBoard.csproj",
         "projectName": "BulletinBoard",
-        "projectPath": "C:\\Users\\buzz\\Source\\Repos\\Bulletin-board\\BulletinBoard.csproj",
+        "projectPath": "C:\\Users\\buzz\\source\\repos\\Bulletin-board\\BulletinBoard.csproj",
         "packagesPath": "C:\\Users\\buzz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\buzz\\Source\\Repos\\Bulletin-board\\obj\\",
+        "outputPath": "C:\\Users\\buzz\\source\\repos\\Bulletin-board\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\buzz\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -59,6 +59,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[6.0.7, )"
+            },
+            "PagedList.Mvc": {
+              "target": "Package",
+              "version": "[4.5.0, )"
             }
           },
           "imports": [
