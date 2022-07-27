@@ -1,11 +1,18 @@
-﻿function openSuccessModal(message) {
-    var myDiv = document.getElementById("MyModalSuccessAlertBody");
-    myDiv.innerHTML = message;
-    $("#myModalSuccess").modal("show");
+﻿function openModal() {
+    var myDiv = document.getElementById("ModalBody");
+    const announcementTitle = $("#Title").val();
+    const announcementContent = $("#Content").val();
+    if (announcementTitle != "" && announcementContent != "") {
+        myDiv.innerHTML = `Are You sure you want to add announcement with title: ${announcementTitle}`;
+        $("#Modal").modal("show");
+        let closeButtons = document.querySelectorAll('[data-dismiss]');
+        closeButtons[0].addEventListener('click', closeModal);
+        closeButtons[1].addEventListener('click', closeModal);
+    }
 }
 
-$(document).ready(() => {
-    var msg = "@TempData["SuccessMessage"]";
-    if (msg)
-        openSuccessModal(msg);
-})
+function closeModal() {
+    $("#Modal").modal("hide");
+}
+
+document.querySelector("#AddAnnouncement").addEventListener("click", openModal);

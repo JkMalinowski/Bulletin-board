@@ -4,13 +4,31 @@
 @using X.PagedList.Mvc.Core
 @using X.PagedList.Mvc.Bootstrap4.Core;
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Announcements";
 }
 
-<h1>Index</h1>
+<h1>Announcements</h1>
+
+<div id="Modal" class="modal fade text-width:30%;" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Information</h2>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div id="ModalBody" class="modal-body alert alert-success">
+				Your announcement has been added successfully!
+			</div>
+            <div class="modal-footer">
+                &nbsp;
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <p>
-    <a asp-action="Create">Add announcement</a>
+    <b><a asp-action="Create">Add announcement</a></b>
 </p>
 <table class="table">
     <thead>
@@ -51,3 +69,19 @@
 </table>
 
 @Html.PagedListPager(Model, page => Url.Action("Index", "Announcements", new { page }), Bootstrap4PagedListRenderOptions.ClassicPlusFirstAndLast)
+@section Scripts{
+    <script>
+        var test = "@TempData["AddedSuccessfully"]";
+        if (test){
+            $(document).ready(() => {
+                $("#Modal").modal("show");
+                let closeButtons = document.querySelectorAll('[data-dismiss]');
+                closeButtons[0].addEventListener('click', closeModal);
+                closeButtons[1].addEventListener('click', closeModal);
+            });
+        }
+        function closeModal() {
+            $("#Modal").modal("hide");
+        }
+    </script>
+}

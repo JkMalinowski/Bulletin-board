@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "9QlS2+lJOwHfK6nUG1IOkhpOX/qeCbE4fnytiJag/9s=",
+  "Hash": "vGPBF9tAPSP4ate77sX593JYImXF8vr6Vkg7LJJcRpw=",
   "Source": "BulletinBoard",
   "BasePath": "_content/BulletinBoard",
   "Mode": "Default",
@@ -100,23 +100,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\modal.js"
-    },
-    {
-      "Identity": "C:\\Users\\buzz\\source\\repos\\Bulletin-board\\wwwroot\\js\\site.js",
-      "SourceId": "BulletinBoard",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\buzz\\source\\repos\\Bulletin-board\\wwwroot\\",
-      "BasePath": "_content/BulletinBoard",
-      "RelativePath": "js/site.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\site.js"
     },
     {
       "Identity": "C:\\Users\\buzz\\source\\repos\\Bulletin-board\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",

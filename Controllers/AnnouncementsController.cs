@@ -27,7 +27,7 @@ namespace BulletinBoard.Controllers
         {
             var announcements = _context.Announcements.OrderByDescending(a => a.DateAdded);
             var pageNumber = page ?? 1;
-            var perPage = 10;
+            var perPage = 15;
             return View(await announcements.ToPagedListAsync(pageNumber, perPage));
         }
 
@@ -60,7 +60,7 @@ namespace BulletinBoard.Controllers
             announcements.DateAdded = DateTime.Now;
             if (ModelState.IsValid)
             {
-                TempData["SuccessMessage"] = $"Are You sure you want to add product with title: {announcements.Title}?";
+                TempData["AddedSuccessfully"] = true;
                 _context.Add(announcements);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
