@@ -1,51 +1,34 @@
-﻿using BulletinBoard.Data;
-using BulletinBoard.Models;
+﻿using BulletinBoard.Models;
+using BulletinBoard.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Collections;
 using X.PagedList;
 
 namespace BulletinBoard.Controllers
 {
     public class AnnouncementsController : Controller
     {
-        private readonly BulletinBoardContext _context;
+        private readonly IAnnouncementRepository _announcementRepository;
 
-        public AnnouncementsController(BulletinBoardContext context)
+        public AnnouncementsController(IAnnouncementRepository announcementRepository)
         {
-            _context = context;
+            _announcementRepository = announcementRepository;
         }
 
-        public async Task<IActionResult> LastTenAnnouncements()
+        public IActionResult LastTenAnnouncements()
         {
-            DateTime today = DateTime.Now;
-            var data = _context.Announcements.OrderByDescending(a => a.DateAdded).Take(10).Where(x => x.DateAdded.AddDays(10) > today);
-            return View(await data.ToListAsync());
+            return View(_announcementRepository.LastTenAnnouncements().ToList());
         }
 
-        public async Task<IActionResult> Index(int? page)
+        public IActionResult Index(int? page)
         {
-            var announcements = _context.Announcements.OrderByDescending(a => a.DateAdded);
             var pageNumber = page ?? 1;
-            var perPage = 15;
-            return View(await announcements.ToPagedListAsync(pageNumber, perPage));
+            var perPage = 2;
+            return View(_announcementRepository.GetAllAnnouncements().ToPagedList(pageNumber, perPage));
         }
 
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int id)
         {
-            if (id == null || _context.Announcements == null)
-            {
-                return NotFound();
-            }
-
-            var announcements = await _context.Announcements
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (announcements == null)
-            {
-                return NotFound();
-            }
-
-            return View(announcements);
+            return View(_announcementRepository.Get(id));
         }
 
         public IActionResult Create()
@@ -55,111 +38,42 @@ namespace BulletinBoard.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Content")] Announcements announcements)
+        public IActionResult Create([Bind("Id,Title,Content")] Announcements announcements)
         {
             announcements.DateAdded = DateTime.Now;
             if (ModelState.IsValid)
             {
                 TempData["AddedSuccessfully"] = true;
-                _context.Add(announcements);
-                await _context.SaveChangesAsync();
+                _announcementRepository.Add(announcements);
                 return RedirectToAction(nameof(Index));
             }
             return View(announcements);
         }
 
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int id)
         {
-            if (id == null || _context.Announcements == null)
-            {
-                return NotFound();
-            }
-
-            var announcements = await _context.Announcements.FindAsync(id);
-            if (announcements == null)
-            {
-                return NotFound();
-            }
-            return View(announcements);
+            return View(_announcementRepository.Get(id));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content")] Announcements announcements)
+        public IActionResult Edit(int id, [Bind("Id,Title,Content")] Announcements announcements)
         {
-            if (id != announcements.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    var announcement = _context.Announcements.FirstOrDefault(x => x.Id == announcements.Id);
-                    announcement.Title = announcements.Title;
-                    announcement.Content = announcements.Content;
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AnnouncementsExists(announcements.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
+            _announcementRepository.Update(id, announcements);
             return View(announcements);
         }
 
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int id)
         {
-            if (id == null || _context.Announcements == null)
-            {
-                return NotFound();
-            }
-
-            var announcements = await _context.Announcements
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (announcements == null)
-            {
-                return NotFound();
-            }
-
-            return View(announcements);
+            return View(_announcementRepository.Get(id));
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            if (_context.Announcements == null)
-            {
-                return Problem("Entity set 'BulletinBoardContext.Announcements'  is null.");
-            }
-            var announcements = await _context.Announcements.FindAsync(id);
-            if (announcements != null)
-            {
-                _context.Announcements.Remove(announcements);
-            }
-
-            await _context.SaveChangesAsync();
+            _announcementRepository.Delete(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool AnnouncementsExists(int id)
-        {
-          return (_context.Announcements?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
-
-        public IEnumerator GetEnumerator()
-        {
-            throw new NotImplementedException();
         }
     }
 }
